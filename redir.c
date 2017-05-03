@@ -18,25 +18,25 @@ char** cash_split(char* line)
   if (!tokens)
   {
     fprintf(stderr,ANSI_COLOR_RED "cash:memory error\n" ANSI_COLOR_RESET);
-    exit(EXIT_FAILURE);
+    exit(EXIT_FAILURE); 
   }
   token = strtok(line, CASH_TOK_DELIM);
   while(token != NULL)
     {
       tokens[position] = token;
-      if(strcmp(tokens[position],"<")==0)
+      if(strcmp(tokens[position],"<=")==0)
       {
         tokens[position] = NULL;
         in.flag = true;
         in.point = position;
       }
-      else if(strcmp(tokens[position],">")==0)
+      else if(strcmp(tokens[position],"=>")==0)
       {
         tokens[position] = NULL;
         out_overwrite.flag = true;
         out_overwrite.point = position;
       }
-      else if(strcmp(tokens[position],">>")==0)
+      else if(strcmp(tokens[position],"=>>")==0)
       {
         tokens[position] = NULL;
         out_append.flag = true;

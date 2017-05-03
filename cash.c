@@ -83,7 +83,8 @@ void cash_loop(void)
   int status;
   status = 1;
 
-  do {    
+  do {
+
     printf(ANSI_COLOR_GREEN "CA$H$ " ANSI_COLOR_RESET);
     line = cash_readline();
     in.flag = out_append.flag = out_overwrite.flag = pippete.flag = false;
