@@ -22,6 +22,24 @@ void handler(int signo)
   printf(ANSI_COLOR_GREEN "\nCA$H$ " ANSI_COLOR_RESET);
 }
 
+void cash_welcome(void)
+{
+  printf(ANSI_COLOR_GREEN);
+  printf(
+"\n ██████╗ █████╗ ▄▄███▄▄·██╗  ██╗   The shell that can."
+"\n██╔════╝██╔══██╗██╔════╝██║  ██║   Built by: -Abhishek Sajwan: 15114002"
+"\n██║     ███████║███████╗███████║             -Akash Gupta: 15114004"
+"\n██║     ██╔══██║╚════██║██╔══██║             -Anmol Anand: 15114013"
+"\n╚██████╗██║  ██║███████║██║  ██║██╗          -Paras Chetal: 15114049"
+"\n ╚═════╝╚═╝  ╚═╝╚═▀▀▀══╝╚═╝  ╚═╝╚═╝          -Shubham Garg: 15114068\n\n\n");
+
+  printf(ANSI_COLOR_RESET);
+                                   
+                                   
+}
+/*
+  reading line from terminal
+*/
 char* cash_readline()
 {
   char *line = NULL;
@@ -90,6 +108,6 @@ int main(int argc, char* argv[], char *envp[])
 
   signal(SIGINT, SIG_IGN);
   signal(SIGINT, handler);
-  
+  cash_welcome();
   cash_loop();
 }

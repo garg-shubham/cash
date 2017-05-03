@@ -5,6 +5,13 @@
 #include <stdbool.h>
 #include "builtins.h"
 
+#define ANSI_COLOR_RED     "\x1b[31m"
+#define ANSI_COLOR_GREEN   "\x1b[32m"
+#define ANSI_COLOR_YELLOW  "\x1b[33m"
+#define ANSI_COLOR_BLUE    "\x1b[34m"
+#define ANSI_COLOR_MAGENTA "\x1b[35m"
+#define ANSI_COLOR_CYAN    "\x1b[36m"
+#define ANSI_COLOR_RESET   "\x1b[0m"
 
 char* builtin_str[] = {
   "cd",
@@ -50,21 +57,21 @@ int cash_help(char **args)
 
   for (i = 0; i < x; i++) {
     printf("  %s\n", builtin_str[i]);
-    if(x==0)
+    if(i==0)
     {
       printf("Changes Working Directory.\n");
     }
-    if(x==1)
+    if(i==1)
     {
       printf("lists all the builtins and describe their functions.\n");
     }
-    if(x==2)
+    if(i==2)
     {
       printf("\t 1. history : lists all previous commands.\n");
       printf("\t 2. history num : lists last #num commmands.\n");
       printf("\t 3. history clear : clears previous history.\n");
     }
-    if(x==3)
+    if(i==3)
     {
       printf("exits CA$H.\n");
     }
@@ -103,6 +110,8 @@ int cash_history(char **args)
   {
     if(strcmp(args[1],"clear")==0)
     {
+      for(int i=0;i<100;i++)
+        free(history_commands[i]);
       history_pointer = 0;
       NOC =0;
     }
@@ -114,7 +123,7 @@ int cash_history(char **args)
     {
       printf("Max 100 commands can be stored\n");
     }
-    else
+    else if( atoi(args[1]) <=100 && atoi(args[1])<=NOC)
     {
       int counter =0;
       for(i = history_pointer-1 ; counter<atoi(args[1]);i--)
@@ -124,6 +133,10 @@ int cash_history(char **args)
         printf("%d. %s",counter+1,history_commands[i]);
         counter++;
       }
+    }
+    else
+    {
+      perror(ANSI_COLOR_RED "Cash" ANSI_COLOR_RESET);
     }
   }
   return 1;
